@@ -25,7 +25,7 @@ export function MonospaceText({
   const style = useMemo(() => {
     return new PIXI.TextStyle({
       fill: color,
-      fontFamily: "Menlo, monospace",
+      fontFamily: "Menlo, Consolas, Inconsolata, monospace",
       fontSize,
     });
   }, [color, fontSize]);
