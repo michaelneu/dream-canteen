@@ -9,6 +9,7 @@ import { CenteredOnScreen } from "./CenteredOnScreen";
 import { Group } from "./primitives/Group";
 import { MonospaceText } from "./primitives/MonospaceText";
 import { Rectangle } from "./primitives/Rectangle";
+import { Clickable } from "./primitives/Clickable";
 
 const BUTTON_WIDTH = 400;
 const BUTTON_HEIGHT = 100;
@@ -81,6 +82,8 @@ export function FullScreenMenu<TOption>({
       }
       label={option.label}
       isActive={activeOption === option.value}
+      onHover={() => setActiveOption(option.value)}
+      onClick={() => onSelectOption(option.value)}
     />
   ));
 
@@ -123,11 +126,13 @@ interface IButtonProps {
   y: number;
   label: string;
   isActive: boolean;
+  onClick: () => void;
+  onHover: () => void;
 }
 
-function Button({ x, y, label, isActive }: IButtonProps) {
+function Button({ x, y, label, isActive, onClick, onHover }: IButtonProps) {
   return (
-    <Group x={x} y={y}>
+    <Clickable x={x} y={y} onClick={onClick} onHover={onHover}>
       <Rectangle
         x={0}
         y={0}
@@ -143,6 +148,6 @@ function Button({ x, y, label, isActive }: IButtonProps) {
         text={label}
         align="center"
       />
-    </Group>
+    </Clickable>
   );
 }
