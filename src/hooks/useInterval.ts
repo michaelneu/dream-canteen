@@ -3,10 +3,13 @@ import { useRef } from "react";
 import { Nullable } from "../types/Nullable";
 import { TimeNumber, Timestamp } from "../types/Numbers";
 import { currentTime } from "../lib/currentTime";
+import { useIsWindowActive } from "./useIsWindowActive";
 
 export function useInterval(fn: () => void, ms: TimeNumber): void {
-  const isEnabled = ms !== 0;
+  const isWindowActive = useIsWindowActive();
+  const isEnabled = ms !== 0 && isWindowActive;
   const previousTimeRef = useRef<Nullable<Timestamp>>(null);
+
   useTick(() => {
     const now = currentTime();
 

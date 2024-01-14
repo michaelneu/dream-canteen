@@ -2,6 +2,8 @@ import React from "react";
 import { exhaustiveSwitchCase } from "../lib/exhaustiveSwitchCase";
 import { useGameStateContext } from "../contexts/GameStateContext";
 import { ActionType } from "../contexts/state/ActionType";
+import { useWindowFocus } from "../hooks/useWindowFocus";
+import { noop } from "../lib/noop";
 import { FullScreenMenu } from "./FullScreenMenu";
 import { MonospaceText } from "./primitives/MonospaceText";
 
@@ -43,6 +45,16 @@ export function PauseMenu({ onExitToMainMenu, onRestart }: IProps) {
       type: ActionType.UnpauseGame,
     });
   }
+
+  useWindowFocus({
+    onBlur: () => {
+      dispatch({
+        data: null,
+        type: ActionType.PauseGame,
+      });
+    },
+    onFocus: noop,
+  });
 
   if (pause == null) {
     return null;
