@@ -10,7 +10,7 @@ import { FPSCounter } from "./FPSCounter";
 import { Level } from "./Level";
 import { Background } from "./Background";
 import { Noise } from "./sprites/Noise";
-import { LevelSelection } from "./LevelSelection";
+import { MainMenu } from "./menu/MainMenu";
 import { PauseMenu } from "./PauseMenu";
 import { GameOverMenu } from "./GameOverMenu";
 
@@ -26,10 +26,7 @@ export function Game() {
 
   if (selectedLevel == null) {
     return (
-      <LevelSelection
-        levelDesciptions={LEVELS}
-        onSelectLevel={setSelectedLevelID}
-      />
+      <MainMenu levelDesciptions={LEVELS} onSelectLevel={setSelectedLevelID} />
     );
   }
 

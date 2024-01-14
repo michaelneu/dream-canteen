@@ -20,18 +20,13 @@ interface IOption<TOption> {
   value: TOption;
 }
 
-interface IPropsBase<TOption> {
+export interface IProps<TOption> {
+  header: React.ReactNode;
+  headerHeight: number;
   options: readonly IOption<TOption>[];
   onSelectOption: (value: TOption) => void;
   backdropOpacity?: number;
 }
-
-interface IPropsWithHeader<TOption> extends IPropsBase<TOption> {
-  header: React.ReactNode;
-  headerHeight: number;
-}
-
-type IProps<TOption> = IPropsBase<TOption> | IPropsWithHeader<TOption>;
 
 export function FullScreenMenu<TOption>({
   options,
