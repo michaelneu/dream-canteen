@@ -15,6 +15,7 @@ export function Clickable({ x, y, children, onHover, onClick }: IProps) {
 
   return (
     <Container
+      cursor="pointer"
       x={x}
       y={y}
       interactive={true}
