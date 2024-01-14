@@ -1,16 +1,68 @@
-import { IngredientType } from "../types/IngredientType";
+import { exhaustiveSwitchCase } from "../lib/exhaustiveSwitchCase";
 import { ImageAsset } from "./ImageAsset";
 
-export const INGREDIENTS = {
-  BLUEBERRY: ImageAsset.Blueberry as IngredientType,
-  BLUEBERRY_JELLY: ImageAsset.BlueberryJelly as IngredientType,
-  BURNED_CONTENTS: ImageAsset.BurnedContents as IngredientType,
-  CUT_BLUEBERRY: ImageAsset.CutBlueberry as IngredientType,
-  EGG: ImageAsset.Egg as IngredientType,
-  EGG_COOKED: ImageAsset.EggCooked as IngredientType,
-  EGG_FRIED_RICE: ImageAsset.EggFriedRice as IngredientType,
-  JELLY: ImageAsset.Jelly as IngredientType,
-  POT: ImageAsset.Pot as IngredientType,
-  RICE: ImageAsset.Rice as IngredientType,
-  RICE_COOKED: ImageAsset.RiceCooked as IngredientType,
-};
+export enum IngredientType {
+  Blueberry,
+  BlueberryJelly,
+  BurnedContents,
+  CutBlueberry,
+  CutStrawberry,
+  Egg,
+  EggCooked,
+  EggFriedRice,
+  Jelly,
+  Pot,
+  Rice,
+  RiceCooked,
+  Strawberry,
+  StrawberryJelly,
+}
+
+export function getIngredientAssets(ingredient: IngredientType): ImageAsset[] {
+  switch (ingredient) {
+    case IngredientType.Blueberry:
+      return [ImageAsset.Blueberry];
+
+    case IngredientType.BlueberryJelly:
+      return [ImageAsset.BlueberryJelly];
+
+    case IngredientType.BurnedContents:
+      return [ImageAsset.BurnedContents];
+
+    case IngredientType.CutBlueberry:
+      return [ImageAsset.CutBlueberry];
+
+    case IngredientType.CutStrawberry:
+      return [ImageAsset.CutStrawberry];
+
+    case IngredientType.Egg:
+      return [ImageAsset.Egg];
+
+    case IngredientType.EggCooked:
+      return [ImageAsset.EggCooked];
+
+    case IngredientType.EggFriedRice:
+      return [ImageAsset.EggFriedRice];
+
+    case IngredientType.Jelly:
+      return [ImageAsset.Jelly];
+
+    case IngredientType.Pot:
+      return [ImageAsset.Pot];
+
+    case IngredientType.Rice:
+      return [ImageAsset.Rice];
+
+    case IngredientType.RiceCooked:
+      return [ImageAsset.RiceCooked];
+
+    case IngredientType.Strawberry:
+      return [ImageAsset.Strawberry1, ImageAsset.Strawberry2];
+
+    case IngredientType.StrawberryJelly:
+      return [ImageAsset.StrawberryJelly];
+
+    default:
+      throw exhaustiveSwitchCase(ingredient);
+  }
+}

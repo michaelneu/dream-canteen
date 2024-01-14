@@ -1,16 +1,10 @@
-import { INGREDIENTS } from "../config/ingredients";
-import { IngredientType } from "../types/IngredientType";
+import { IngredientType } from "../config/ingredients";
 import { LevelDescription } from "./LevelDescription";
-import { invariant } from "./invariant";
 
 export function getRawIngredient(
   ingredient: IngredientType,
   levelDescription: LevelDescription,
 ): IngredientType {
-  if (ingredient === INGREDIENTS.POT) {
-    return ingredient;
-  }
-
   const uncooked =
     levelDescription
       .getCookingStation()
@@ -21,11 +15,9 @@ export function getRawIngredient(
     levelDescription
       .getPrepareStation()
       .getInvertedTransitions()
-      .get(uncooked ?? ingredient) ??
+      .get(uncooked) ??
     uncooked ??
     ingredient;
-
-  invariant(unprepared !== ingredient, "Could not find raw ingredient");
 
   return unprepared;
 }

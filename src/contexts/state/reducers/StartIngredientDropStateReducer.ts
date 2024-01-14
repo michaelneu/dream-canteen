@@ -1,5 +1,5 @@
 import { INGREDIENTS_TO_DROP } from "../../../config";
-import { IngredientType } from "../../../types/IngredientType";
+import { IngredientType } from "../../../config/ingredients";
 import { ActionType } from "../ActionType";
 import { ActionOf, BaseStateReducer } from "../BaseStateReducer";
 import { IState } from "../IState";

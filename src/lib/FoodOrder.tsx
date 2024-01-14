@@ -2,12 +2,14 @@ import { Group } from "../components/primitives/Group";
 import { BlockSizedSprite } from "../components/sprites/BlockSizedSprite";
 import { BLOCK_SIZE, MAX_INGREDIENTS_PER_RECIPE } from "../config";
 import { ImageAsset } from "../config/ImageAsset";
+import { getIngredientAssets } from "../config/ingredients";
 import { IRecipe } from "../types/IRecipe";
 import { IRenderable } from "../types/IRenderable";
 import { IWithID } from "../types/IWithID";
 import { Opaque } from "../types/OpaqueType";
 import { Food } from "./Food";
 import { LevelDescription } from "./LevelDescription";
+import { firstx } from "./firstx";
 import { getRawIngredient } from "./getRawIngredient";
 
 const INGREDIENTS_SCALE = 1 / MAX_INGREDIENTS_PER_RECIPE;
@@ -61,7 +63,11 @@ export class FoodOrder implements IRenderable, IWithID<FoodOrderID> {
           y={BLOCK_SIZE * INGREDIENTS_SCALE + BACKGROUND_INGREDIENT_OFFSET}
           scale={(1 - INGREDIENTS_SCALE) * 0.6}
         >
-          <BlockSizedSprite x={0} y={0} url={recipe.result as ImageAsset} />
+          <BlockSizedSprite
+            x={0}
+            y={0}
+            url={firstx(getIngredientAssets(recipe.result))}
+          />
         </Group>
       </Group>
     );

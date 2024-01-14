@@ -7,10 +7,9 @@ import { DroppingContainer } from "../components/DroppingContainer";
 import { BlinkingAfter } from "../components/BlinkingAfter";
 import { Group } from "../components/primitives/Group";
 import { BLOCK_SIZE, INGREDIENTS_BLINK_AFTER_MS } from "../config";
-import { IngredientType } from "../types/IngredientType";
 import { Timestamp } from "../types/Numbers";
 import { ICarryableItem } from "../types/ICarryableItem";
-import { INGREDIENTS } from "../config/ingredients";
+import { IngredientType } from "../config/ingredients";
 import { LevelDescription } from "./LevelDescription";
 import { currentTime } from "./currentTime";
 import { Food } from "./Food";
@@ -51,7 +50,7 @@ export class DroppedIngredient
   }
 
   toPickedUpItem(): ICarryableItem {
-    if (this.getType() === INGREDIENTS.POT) {
+    if (this.getType() === IngredientType.Pot) {
       return new Pot([]);
     }
 
@@ -59,7 +58,7 @@ export class DroppedIngredient
   }
 
   render(levelDescription: LevelDescription): React.ReactNode {
-    const food = new Food(this.getType()).render(levelDescription);
+    const item = this.toPickedUpItem().render(levelDescription);
 
     return (
       <DroppingContainer
@@ -69,7 +68,7 @@ export class DroppedIngredient
       >
         <Group x={0} y={0} scale={FOOD_SCALE}>
           <BlinkingAfter delayMS={INGREDIENTS_BLINK_AFTER_MS}>
-            {food}
+            {item}
           </BlinkingAfter>
         </Group>
       </DroppingContainer>

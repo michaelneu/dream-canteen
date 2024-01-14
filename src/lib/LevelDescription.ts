@@ -1,8 +1,8 @@
 import { MAX_INGREDIENTS_PER_RECIPE } from "../config";
 import { IRecipe } from "../types/IRecipe";
 import { IngredientTransitions } from "../types/IngredientTransitions";
-import { IngredientType } from "../types/IngredientType";
 import { Opaque } from "../types/OpaqueType";
+import { IngredientType } from "../config/ingredients";
 import { LevelMap } from "./LevelMap";
 import { invariant } from "./invariant";
 import { InteractiveStationDescription } from "./InteractiveStationDescription";

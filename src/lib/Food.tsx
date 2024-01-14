@@ -2,10 +2,10 @@ import React from "react";
 import { BlockSizedSprite } from "../components/sprites/BlockSizedSprite";
 import { ICarryableItem } from "../types/ICarryableItem";
 import { IWithID } from "../types/IWithID";
-import { IngredientType } from "../types/IngredientType";
 import { Opaque } from "../types/OpaqueType";
-import { ImageAsset } from "../config/ImageAsset";
+import { IngredientType, getIngredientAssets } from "../config/ingredients";
 import { LevelDescription } from "./LevelDescription";
+import { firstx } from "./firstx";
 
 type FoodID = Opaque<string, "FoodID">;
 
@@ -38,7 +38,7 @@ export class Food implements ICarryableItem, IWithID<FoodID> {
         key={this.getID()}
         x={x}
         y={y}
-        url={this.getIngredient() as ImageAsset}
+        url={firstx(getIngredientAssets(this.getIngredient()))}
       />
     );
   }

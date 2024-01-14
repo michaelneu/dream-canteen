@@ -16,7 +16,7 @@ export function ImageAssetPreloader() {
           y={-1000}
           width={0}
           height={0}
-          url={asset as ImageAsset}
+          url={asset}
         />
       ))}
     </>

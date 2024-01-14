@@ -1,3 +1,4 @@
+import { IngredientType } from "../../config/ingredients";
 import { AbilityType } from "../../lib/AbilityType";
 import { BoundingBox } from "../../lib/BoundingBox";
 import { Direction } from "../../lib/Direction";
@@ -8,7 +9,6 @@ import { LevelMap } from "../../lib/LevelMap";
 import { SelectedChoicesMenu } from "../../lib/SelectedChoicesMenu";
 import { BaseBlock, BlockID } from "../../lib/blocks/BaseBlock";
 import { ICarryableItem } from "../../types/ICarryableItem";
-import { IngredientType } from "../../types/IngredientType";
 import { Nullable } from "../../types/Nullable";
 import { TimeNumber, Timestamp } from "../../types/Numbers";
 import { ActionType } from "./ActionType";

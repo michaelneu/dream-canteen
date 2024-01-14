@@ -7,9 +7,9 @@ import { ICarryableItem } from "../../types/ICarryableItem";
 import { Nullable } from "../../types/Nullable";
 import { Food } from "../Food";
 import { LevelDescription } from "../LevelDescription";
-import { INGREDIENTS } from "../../config/ingredients";
 import { Pot } from "../Pot";
 import { areSetsEqual } from "../areSetsEqual";
+import { IngredientType } from "../../config/ingredients";
 import { BaseBlockWithProgress } from "./BaseBlockWithProgress";
 
 export class CookingStationBlock extends BaseBlockWithProgress {
@@ -72,9 +72,9 @@ export class CookingStationBlock extends BaseBlockWithProgress {
     if (storage instanceof Food) {
       if (
         nextProgress >= 200 &&
-        storage.getIngredient() !== INGREDIENTS.BURNED_CONTENTS
+        storage.getIngredient() !== IngredientType.BurnedContents
       ) {
-        return new Food(INGREDIENTS.BURNED_CONTENTS);
+        return new Food(IngredientType.BurnedContents);
       }
 
       const cookedIngredient = levelDescription
@@ -89,14 +89,14 @@ export class CookingStationBlock extends BaseBlockWithProgress {
 
     if (storage instanceof Pot) {
       if (nextProgress >= 200) {
-        return new Food(INGREDIENTS.BURNED_CONTENTS);
+        return new Food(IngredientType.BurnedContents);
       }
 
       const potIngredients = new Set(
         storage.getContents().map((food) => food.getIngredient()),
       );
 
-      potIngredients.add(INGREDIENTS.POT);
+      potIngredients.add(IngredientType.Pot);
 
       const recipe = levelDescription
         .getRecipes()

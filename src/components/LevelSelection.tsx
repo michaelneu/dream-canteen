@@ -11,13 +11,18 @@ import { FallingSprite } from "./sprites/FallingSprite";
 const FALLING_SPRITES = repeatArray(
   [
     ImageAsset.Blueberry,
+    ImageAsset.CutBlueberry,
+    ImageAsset.BlueberryJelly,
     ImageAsset.EggFriedRice,
     ImageAsset.Rice,
     ImageAsset.Jelly,
-    ImageAsset.CutBlueberry,
     ImageAsset.Pot,
+    ImageAsset.Strawberry1,
+    ImageAsset.Strawberry2,
+    ImageAsset.CutStrawberry,
+    ImageAsset.StrawberryJelly,
   ],
-  20,
+  10,
 ).map((sprite, index) => {
   const size = randomBetween(40, 50);
 

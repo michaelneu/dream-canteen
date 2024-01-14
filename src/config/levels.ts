@@ -1,6 +1,6 @@
 import { LevelDescription } from "../lib/LevelDescription";
 import { LevelMap } from "../lib/LevelMap";
-import { INGREDIENTS } from "./ingredients";
+import { IngredientType } from "./ingredients";
 
 const MAPS = [
   `
@@ -90,32 +90,35 @@ export const LEVELS: readonly LevelDescription[] = MAPS.map(
     new LevelDescription(
       `Level.${index}`,
       LevelMap.fromStringRepresentation(map),
-      new Map([[INGREDIENTS.BLUEBERRY, INGREDIENTS.CUT_BLUEBERRY]]),
+      new Map([[IngredientType.Blueberry, IngredientType.CutBlueberry]]),
       new Map([
-        [INGREDIENTS.RICE, INGREDIENTS.RICE_COOKED],
-        [INGREDIENTS.EGG, INGREDIENTS.EGG_COOKED],
+        [IngredientType.Rice, IngredientType.RiceCooked],
+        [IngredientType.Egg, IngredientType.EggCooked],
       ]),
       [
-        INGREDIENTS.BLUEBERRY,
-        INGREDIENTS.JELLY,
-        INGREDIENTS.RICE,
-        INGREDIENTS.EGG,
-        INGREDIENTS.POT,
+        IngredientType.Blueberry,
+        IngredientType.Jelly,
+        IngredientType.Rice,
+        IngredientType.Egg,
+        IngredientType.Pot,
       ],
       [
         {
-          ingredients: new Set([INGREDIENTS.CUT_BLUEBERRY, INGREDIENTS.JELLY]),
+          ingredients: new Set([
+            IngredientType.CutBlueberry,
+            IngredientType.Jelly,
+          ]),
           label: "Blueberry Jelly",
-          result: INGREDIENTS.BLUEBERRY_JELLY,
+          result: IngredientType.BlueberryJelly,
         },
         {
           ingredients: new Set([
-            INGREDIENTS.EGG_COOKED,
-            INGREDIENTS.RICE_COOKED,
-            INGREDIENTS.POT,
+            IngredientType.EggCooked,
+            IngredientType.RiceCooked,
+            IngredientType.Pot,
           ]),
           label: "Egg Fried Rice",
-          result: INGREDIENTS.EGG_FRIED_RICE,
+          result: IngredientType.EggFriedRice,
         },
       ],
     ),

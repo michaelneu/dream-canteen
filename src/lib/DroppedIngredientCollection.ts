@@ -1,5 +1,5 @@
+import { IngredientType } from "../config/ingredients";
 import { ICoordinate } from "../types/ICoordinate";
-import { IngredientType } from "../types/IngredientType";
 import { TimeNumber } from "../types/Numbers";
 import { DroppedIngredient } from "./DroppedIngredient";
 import { LevelMap } from "./LevelMap";

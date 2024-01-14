@@ -1,4 +1,4 @@
-import { IngredientType } from "./IngredientType";
+import { IngredientType } from "../config/ingredients";
 
 export interface IRecipe {
   readonly label: string;
