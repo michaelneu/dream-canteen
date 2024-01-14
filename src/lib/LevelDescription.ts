@@ -7,6 +7,15 @@ import { LevelMap } from "./LevelMap";
 import { invariant } from "./invariant";
 import { InteractiveStationDescription } from "./InteractiveStationDescription";
 
+interface IInput {
+  name: string;
+  levelMap: LevelMap;
+  prepareStationTransitions: IngredientTransitions;
+  cookingStationTransitions: IngredientTransitions;
+  supplyStationChoices: readonly IngredientType[];
+  recipes: readonly IRecipe[];
+}
+
 export type LevelDescriptionID = Opaque<number, "LevelDescriptionID">;
 let nextID = 0;
 
@@ -20,14 +29,14 @@ export class LevelDescription {
   private supplyStationChoices: readonly IngredientType[];
   private recipes: readonly IRecipe[];
 
-  constructor(
-    name: string,
-    levelMap: LevelMap,
-    prepareStationTransitions: IngredientTransitions,
-    cookingStationTransitions: IngredientTransitions,
-    supplyStationChoices: readonly IngredientType[],
-    recipes: readonly IRecipe[],
-  ) {
+  constructor({
+    name,
+    levelMap,
+    prepareStationTransitions,
+    cookingStationTransitions,
+    supplyStationChoices,
+    recipes,
+  }: IInput) {
     this.id = nextID as LevelDescriptionID;
     nextID++;
 

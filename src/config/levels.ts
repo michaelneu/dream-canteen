@@ -87,26 +87,18 @@ const MAPS = [
 
 export const LEVELS: readonly LevelDescription[] = MAPS.map(
   (map, index) =>
-    new LevelDescription(
-      `Level.${index}`,
-      LevelMap.fromStringRepresentation(map),
-      new Map([
-        [IngredientType.Blueberry, IngredientType.CutBlueberry],
-        [IngredientType.Strawberry, IngredientType.CutStrawberry],
-      ]),
-      new Map([
+    new LevelDescription({
+      cookingStationTransitions: new Map([
         [IngredientType.Rice, IngredientType.RiceCooked],
         [IngredientType.Egg, IngredientType.EggCooked],
       ]),
-      [
-        IngredientType.Blueberry,
-        IngredientType.Strawberry,
-        IngredientType.Jelly,
-        IngredientType.Rice,
-        IngredientType.Egg,
-        IngredientType.Pot,
-      ],
-      [
+      levelMap: LevelMap.fromStringRepresentation(map),
+      name: `Level.${index}`,
+      prepareStationTransitions: new Map([
+        [IngredientType.Blueberry, IngredientType.CutBlueberry],
+        [IngredientType.Strawberry, IngredientType.CutStrawberry],
+      ]),
+      recipes: [
         {
           ingredients: new Set([
             IngredientType.CutBlueberry,
@@ -133,5 +125,13 @@ export const LEVELS: readonly LevelDescription[] = MAPS.map(
           result: IngredientType.EggFriedRice,
         },
       ],
-    ),
+      supplyStationChoices: [
+        IngredientType.Blueberry,
+        IngredientType.Strawberry,
+        IngredientType.Jelly,
+        IngredientType.Rice,
+        IngredientType.Egg,
+        IngredientType.Pot,
+      ],
+    }),
 );
