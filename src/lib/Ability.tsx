@@ -1,4 +1,6 @@
 import { MonospaceText } from "../components/primitives/MonospaceText";
+import { BlockSizedSprite } from "../components/sprites/BlockSizedSprite";
+import { ImageAsset } from "../config/ImageAsset";
 import { IRenderable } from "../types/IRenderable";
 import { AbilityType } from "./AbilityType";
 import { exhaustiveSwitchCase } from "./exhaustiveSwitchCase";
@@ -15,25 +17,27 @@ export class Ability implements IRenderable {
   }
 
   render(): React.ReactNode {
-    return <MonospaceText x={0} y={0} text={this.getEmoji()} fontSize={96} />;
-  }
+    const textProps = {
+      fontSize: 96,
+      x: 0,
+      y: 0,
+    };
 
-  private getEmoji(): string {
     switch (this.type) {
       case AbilityType.AutoPrepareIngredients:
-        return "🔪";
+        return <MonospaceText {...textProps} text="🔪" />;
 
       case AbilityType.Backpack:
-        return "🎒";
+        return <MonospaceText {...textProps} text="🎒" />;
 
       case AbilityType.MoveFast:
-        return "💨";
+        return <BlockSizedSprite x={0} y={0} url={ImageAsset.SpeedCloak} />;
 
       case AbilityType.NoClip:
-        return "🫥";
+        return <MonospaceText {...textProps} text="🫥" />;
 
       case AbilityType.ProgressStationAssistant:
-        return "🤖";
+        return <MonospaceText {...textProps} text="🤖" />;
 
       default:
         throw exhaustiveSwitchCase(this.type);

@@ -9,7 +9,6 @@ import { AbilityType } from "../lib/AbilityType";
 import { useKeyUp } from "../hooks/useKeyUp";
 import { ActionType } from "../contexts/state/ActionType";
 import { Actions } from "../contexts/state/ReducerCollection";
-import { ImageAsset } from "../config/ImageAsset";
 import { PlayerChoicesMenu } from "./PlayerChoicesMenu";
 import { Sprite } from "./primitives/Sprite";
 import { Group } from "./primitives/Group";
@@ -17,28 +16,6 @@ import { SelectionHighlight } from "./SelectionHighlight";
 import { CarriedItem } from "./CarriedItem";
 
 const SPRITE_SCALE_FACTOR = 1.1;
-const SPRITES = {
-  down: [
-    ImageAsset.PlayerMoveDown0,
-    ImageAsset.PlayerMoveDown1,
-    ImageAsset.PlayerMoveDown2,
-  ],
-  left: [
-    ImageAsset.PlayerMoveLeft0,
-    ImageAsset.PlayerMoveLeft1,
-    ImageAsset.PlayerMoveLeft2,
-  ],
-  right: [
-    ImageAsset.PlayerMoveRight0,
-    ImageAsset.PlayerMoveRight1,
-    ImageAsset.PlayerMoveRight2,
-  ],
-  up: [
-    ImageAsset.PlayerMoveUp0,
-    ImageAsset.PlayerMoveUp1,
-    ImageAsset.PlayerMoveUp2,
-  ],
-};
 
 export function Player() {
   const isDownKeyDown = useIsKeyPressed(Keys.ArrowDown);
@@ -75,7 +52,6 @@ export function Player() {
   const sprite = useMovementSprite({
     isCurrentlyMoving,
     lookingDirection,
-    sprites: SPRITES,
   });
 
   useKeyDownWhileGameIsRunning(Keys.Space, () => {

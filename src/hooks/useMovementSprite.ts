@@ -3,6 +3,8 @@ import { Direction } from "../lib/Direction";
 import { TimeNumber } from "../types/Numbers";
 import { exhaustiveSwitchCase } from "../lib/exhaustiveSwitchCase";
 import { ImageAsset } from "../config/ImageAsset";
+import { useGameStateContext } from "../contexts/GameStateContext";
+import { AbilityType } from "../lib/AbilityType";
 import { useIntervalDuringGame } from "./useIntervalDuringGame";
 import { useRoundRobinArray } from "./useRoundRobinArray";
 import { INTERVAL_DISABLED } from "./useInterval";
@@ -14,17 +16,67 @@ interface ISprites {
   left: readonly ImageAsset[];
 }
 
+const REGULAR_SPRITES: ISprites = {
+  down: [
+    ImageAsset.PlayerMoveDown0,
+    ImageAsset.PlayerMoveDown1,
+    ImageAsset.PlayerMoveDown2,
+  ],
+  left: [
+    ImageAsset.PlayerMoveLeft0,
+    ImageAsset.PlayerMoveLeft1,
+    ImageAsset.PlayerMoveLeft2,
+  ],
+  right: [
+    ImageAsset.PlayerMoveRight0,
+    ImageAsset.PlayerMoveRight1,
+    ImageAsset.PlayerMoveRight2,
+  ],
+  up: [
+    ImageAsset.PlayerMoveUp0,
+    ImageAsset.PlayerMoveUp1,
+    ImageAsset.PlayerMoveUp2,
+  ],
+};
+
+const SPEED_CLOAK_SPRITES: ISprites = {
+  down: [
+    ImageAsset.PlayerMoveSpeedCloakDown1,
+    ImageAsset.PlayerMoveSpeedCloakDown2,
+  ],
+  left: [
+    ImageAsset.PlayerMoveSpeedCloakLeft1,
+    ImageAsset.PlayerMoveSpeedCloakLeft2,
+  ],
+  right: [
+    ImageAsset.PlayerMoveSpeedCloakRight1,
+    ImageAsset.PlayerMoveSpeedCloakRight2,
+  ],
+  up: [ImageAsset.PlayerMoveSpeedCloakUp1, ImageAsset.PlayerMoveSpeedCloakUp2],
+};
+
 interface IInput {
-  sprites: ISprites;
   lookingDirection: Direction;
   isCurrentlyMoving: boolean;
 }
 
 export function useMovementSprite({
-  sprites,
   lookingDirection,
   isCurrentlyMoving,
 }: IInput): ImageAsset {
+  const {
+    state: {
+      player: {
+        ability: { specialAbility },
+      },
+    },
+  } = useGameStateContext();
+
+  const sprites =
+    specialAbility === AbilityType.MoveFast
+      ? SPEED_CLOAK_SPRITES
+      : REGULAR_SPRITES;
+
   const currentSprites = getSprites(lookingDirection, sprites);
   const [sprite, nextSprite] = useRoundRobinArray(currentSprites);
 
