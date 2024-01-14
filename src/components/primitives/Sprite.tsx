@@ -1,5 +1,5 @@
+import { Sprite as PIXISprite } from "@pixi/react";
 import { ImageAsset } from "../../config/ImageAsset";
-import { UnscaledSprite } from "./UnscaledSprite";
 
 interface IProps {
   x: number;
@@ -10,15 +10,16 @@ interface IProps {
   opacity?: number;
 }
 
-export function Sprite({ url, x, y, width, height, opacity }: IProps) {
+export function Sprite({ url, x, y, width, height, opacity = 1 }: IProps) {
   return (
-    <UnscaledSprite
-      opacity={opacity}
-      url={url}
+    <PIXISprite
+      image={url}
       x={x}
       y={y}
+      anchor={0}
       width={width}
       height={height}
+      alpha={opacity}
     />
   );
 }

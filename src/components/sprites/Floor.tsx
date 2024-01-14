@@ -2,7 +2,7 @@ import React from "react";
 import { useGameStateContext } from "../../contexts/GameStateContext";
 import { range } from "../../lib/range";
 import { BLOCK_SIZE } from "../../config";
-import { UnscaledSprite } from "../primitives/UnscaledSprite";
+import { Sprite } from "../primitives/Sprite";
 import { ImageAsset } from "../../config/ImageAsset";
 
 const TEXTURE_OFFSET_X = -30 - BLOCK_SIZE;
@@ -21,7 +21,7 @@ export function Floor() {
           <React.Fragment key={row}>
             {range(0, levelMap.getColumns()).map((column) =>
               column % 2 === 0 ? null : (
-                <UnscaledSprite
+                <Sprite
                   key={column}
                   x={column * BLOCK_SIZE + TEXTURE_OFFSET_X}
                   y={row * BLOCK_SIZE + TEXTURE_OFFSET_Y}
