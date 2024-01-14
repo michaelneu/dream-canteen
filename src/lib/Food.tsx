@@ -4,6 +4,7 @@ import { ICarryableItem } from "../types/ICarryableItem";
 import { IWithID } from "../types/IWithID";
 import { Opaque } from "../types/OpaqueType";
 import { IngredientType, getIngredientAssets } from "../config/ingredients";
+import { ImageAsset } from "../config/ImageAsset";
 import { LevelDescription } from "./LevelDescription";
 import { firstx } from "./firstx";
 
@@ -11,9 +12,11 @@ type FoodID = Opaque<string, "FoodID">;
 
 export class Food implements ICarryableItem, IWithID<FoodID> {
   private readonly ingredient: IngredientType;
+  private readonly asset: ImageAsset;
 
-  constructor(ingredient: IngredientType) {
+  constructor(ingredient: IngredientType, asset?: ImageAsset) {
     this.ingredient = ingredient;
+    this.asset = asset ?? firstx(getIngredientAssets(ingredient));
   }
 
   getID(): FoodID {
@@ -33,13 +36,6 @@ export class Food implements ICarryableItem, IWithID<FoodID> {
     x: number,
     y: number,
   ): React.ReactNode {
-    return (
-      <BlockSizedSprite
-        key={this.getID()}
-        x={x}
-        y={y}
-        url={firstx(getIngredientAssets(this.getIngredient()))}
-      />
-    );
+    return <BlockSizedSprite key={this.getID()} x={x} y={y} url={this.asset} />;
   }
 }

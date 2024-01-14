@@ -9,11 +9,13 @@ import { Group } from "../components/primitives/Group";
 import { BLOCK_SIZE, INGREDIENTS_BLINK_AFTER_MS } from "../config";
 import { Timestamp } from "../types/Numbers";
 import { ICarryableItem } from "../types/ICarryableItem";
-import { IngredientType } from "../config/ingredients";
+import { IngredientType, getIngredientAssets } from "../config/ingredients";
+import { ImageAsset } from "../config/ImageAsset";
 import { LevelDescription } from "./LevelDescription";
 import { currentTime } from "./currentTime";
 import { Food } from "./Food";
 import { Pot } from "./Pot";
+import { randomSample } from "./randomSample";
 
 const FOOD_SCALE = 0.5;
 const FOOD_CENTER_OFFSET = (BLOCK_SIZE * FOOD_SCALE) / 2;
@@ -24,11 +26,15 @@ export class DroppedIngredient
   implements IWithID<DroppedIngredientID>, IRenderable
 {
   private readonly type: IngredientType;
+  private readonly asset: ImageAsset;
   private readonly location: ICoordinate;
   private readonly createdTime: Timestamp;
 
   constructor(type: IngredientType, location: ICoordinate) {
+    const availableAssets = getIngredientAssets(type);
+    this.asset = randomSample(availableAssets);
     this.type = type;
+
     this.location = location;
     this.createdTime = currentTime();
   }
@@ -54,7 +60,7 @@ export class DroppedIngredient
       return new Pot([]);
     }
 
-    return new Food(this.getType());
+    return new Food(this.getType(), this.asset);
   }
 
   render(levelDescription: LevelDescription): React.ReactNode {
