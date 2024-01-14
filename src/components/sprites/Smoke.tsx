@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import { ImageAsset } from "../../config/ImageAsset";
 import { useRoundRobinArray } from "../../hooks/useRoundRobinArray";
-import { useInterval } from "../../hooks/useInterval";
+import { useIntervalDuringGame } from "../../hooks/useIntervalDuringGame";
 import { ONE_SECOND } from "../../lib/Time";
 import { TimeNumber } from "../../types/Numbers";
 import { Sprite } from "../primitives/Sprite";
@@ -26,7 +26,7 @@ export function Smoke({ x, y }: IProps) {
 
   const [sprite, nextSprite] = useRoundRobinArray(sprites);
 
-  useInterval(
+  useIntervalDuringGame(
     () => {
       nextSprite();
     },

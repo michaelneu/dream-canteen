@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useInterval } from "../hooks/useInterval";
+import { useIntervalDuringGame } from "../hooks/useIntervalDuringGame";
 import { TimeNumber } from "../types/Numbers";
 
 interface IProps {
@@ -9,7 +9,7 @@ interface IProps {
 export function Blinking({ children }: IProps) {
   const [isVisible, setIsVisible] = useState(true);
 
-  useInterval(() => {
+  useIntervalDuringGame(() => {
     setIsVisible((value) => !value);
   }, 250 as TimeNumber);
 

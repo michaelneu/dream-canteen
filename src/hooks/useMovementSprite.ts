@@ -3,8 +3,9 @@ import { Direction } from "../lib/Direction";
 import { TimeNumber } from "../types/Numbers";
 import { exhaustiveSwitchCase } from "../lib/exhaustiveSwitchCase";
 import { ImageAsset } from "../config/ImageAsset";
-import { INTERVAL_DISABLED, useInterval } from "./useInterval";
+import { useIntervalDuringGame } from "./useIntervalDuringGame";
 import { useRoundRobinArray } from "./useRoundRobinArray";
+import { INTERVAL_DISABLED } from "./useInterval";
 
 interface ISprites {
   up: readonly ImageAsset[];
@@ -27,7 +28,7 @@ export function useMovementSprite({
   const currentSprites = getSprites(lookingDirection, sprites);
   const [sprite, nextSprite] = useRoundRobinArray(currentSprites);
 
-  useInterval(
+  useIntervalDuringGame(
     () => {
       nextSprite();
     },

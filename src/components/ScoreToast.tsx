@@ -1,6 +1,6 @@
 import { useState } from "react";
 import React from "react";
-import { useInterval } from "../hooks/useInterval";
+import { useIntervalDuringGame } from "../hooks/useIntervalDuringGame";
 import { TimeNumber } from "../types/Numbers";
 import { MonospaceText } from "./primitives/MonospaceText";
 
@@ -15,7 +15,7 @@ interface IProps {
 export function ScoreToast({ x, sourceY, destinationY, label, color }: IProps) {
   const [animationProgress, setAnimationProgress] = useState(0);
 
-  useInterval(
+  useIntervalDuringGame(
     () => {
       setAnimationProgress((value) => value + 0.05);
     },

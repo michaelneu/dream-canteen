@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import { useInterval } from "../hooks/useInterval";
+import { useIntervalDuringGame } from "../hooks/useIntervalDuringGame";
 import { BoundingBox } from "../lib/BoundingBox";
 import { TimeNumber } from "../types/Numbers";
 import { BLOCK_SIZE } from "../config";
@@ -17,7 +17,7 @@ export function SelectionHighlight({ boundingBox }: IProps) {
   const [scale, setScale] = useState(1);
   const directionRef = useRef(1);
 
-  useInterval(() => {
+  useIntervalDuringGame(() => {
     if (scale > 1.2) {
       directionRef.current = -1;
     } else if (scale < 1) {

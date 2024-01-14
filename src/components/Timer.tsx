@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useGameStateContext } from "../contexts/GameStateContext";
 import { BLOCK_SIZE, GAME_DURATION } from "../config";
 import { Percentage, TimeNumber } from "../types/Numbers";
-import { useInterval } from "../hooks/useInterval";
+import { useIntervalDuringGame } from "../hooks/useIntervalDuringGame";
 import { currentTime } from "../lib/currentTime";
 import { Circle } from "./primitives/Circle";
 import { Group } from "./primitives/Group";
@@ -24,7 +24,7 @@ export function Timer({ x, y }: IProps) {
     1 as Percentage,
   );
 
-  useInterval(
+  useIntervalDuringGame(
     () => {
       const passedTime = currentTime() - startTime;
       setPassedTimePercentage((passedTime / GAME_DURATION) as Percentage);

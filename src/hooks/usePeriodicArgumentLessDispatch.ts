@@ -4,14 +4,15 @@ import {
 } from "../contexts/GameStateContext";
 import { ActionType } from "../contexts/state/ActionType";
 import { TimeNumber } from "../types/Numbers";
-import { INTERVAL_DISABLED, useInterval } from "./useInterval";
+import { INTERVAL_DISABLED } from "./useInterval";
+import { useIntervalDuringGame } from "./useIntervalDuringGame";
 
 export function usePeriodicArgumentLessDispatch<TAction extends ActionType>(
   actions: readonly ArgumentLessAction<TAction>[],
   interval: TimeNumber,
 ) {
   const { dispatch } = useGameStateContext();
-  useInterval(
+  useIntervalDuringGame(
     () => {
       for (const action of actions) {
         dispatch({

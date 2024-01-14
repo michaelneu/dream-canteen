@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { INTERVAL_DISABLED, useInterval } from "../hooks/useInterval";
+import { useIntervalDuringGame } from "../hooks/useIntervalDuringGame";
 import { TimeNumber } from "../types/Numbers";
+import { INTERVAL_DISABLED } from "../hooks/useInterval";
 import { Group } from "./primitives/Group";
 
 interface IProps {
@@ -12,7 +13,7 @@ interface IProps {
 export function DroppingContainer({ x, y, children }: IProps) {
   const [dropProgress, setDropProgress] = useState(0);
 
-  useInterval(
+  useIntervalDuringGame(
     () => {
       setDropProgress((value) => value + 0.01);
     },

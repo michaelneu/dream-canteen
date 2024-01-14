@@ -2,7 +2,7 @@ import { IKeyboardMovement } from "../types/IKeyboardMovement";
 import { useGameStateContext } from "../contexts/GameStateContext";
 import { ActionType } from "../contexts/state/ActionType";
 import { TimeNumber } from "../types/Numbers";
-import { useInterval } from "./useInterval";
+import { useIntervalDuringGame } from "./useIntervalDuringGame";
 
 export function useKeyboardNavigation({
   isDownKeyDown,
@@ -12,7 +12,7 @@ export function useKeyboardNavigation({
 }: IKeyboardMovement): void {
   const { dispatch } = useGameStateContext();
 
-  useInterval(() => {
+  useIntervalDuringGame(() => {
     let deltaX = 0;
 
     if (isRightKeyDown) {
