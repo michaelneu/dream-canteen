@@ -42,7 +42,7 @@ export function GameOverMenu({ onExitToMainMenu, onRestart }: IProps) {
         <MonospaceText
           text="Time's Up!"
           color="black"
-          x={200}
+          x={150}
           y={50}
           align="center"
           fontSize={32}
