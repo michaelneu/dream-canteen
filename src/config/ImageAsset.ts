@@ -16,7 +16,6 @@ export enum ImageAsset {
   EggFriedRice = "assets/items/food/egg-fried-rice.png",
   FloorGrid = "assets/floor/grid.png",
   Jelly = "assets/items/food/jelly.png",
-  JellyBlocks = "assets/items/food/jelly-blocks.png",
   MenuLogo = "assets/logo.png",
   OrderBackground = "assets/items/recipes/order-background.png",
   Plate = "assets/items/plate.png",

@@ -10,7 +10,6 @@ export const INGREDIENTS = {
   EGG_COOKED: ImageAsset.EggCooked as IngredientType,
   EGG_FRIED_RICE: ImageAsset.EggFriedRice as IngredientType,
   JELLY: ImageAsset.Jelly as IngredientType,
-  JELLY_BLOCKS: ImageAsset.JellyBlocks as IngredientType,
   POT: ImageAsset.Pot as IngredientType,
   RICE: ImageAsset.Rice as IngredientType,
   RICE_COOKED: ImageAsset.RiceCooked as IngredientType,

@@ -92,13 +92,12 @@ export const LEVELS: readonly LevelDescription[] = MAPS.map(
       LevelMap.fromStringRepresentation(map),
       new Map([[INGREDIENTS.BLUEBERRY, INGREDIENTS.CUT_BLUEBERRY]]),
       new Map([
-        [INGREDIENTS.JELLY_BLOCKS, INGREDIENTS.JELLY],
         [INGREDIENTS.RICE, INGREDIENTS.RICE_COOKED],
         [INGREDIENTS.EGG, INGREDIENTS.EGG_COOKED],
       ]),
       [
         INGREDIENTS.BLUEBERRY,
-        INGREDIENTS.JELLY_BLOCKS,
+        INGREDIENTS.JELLY,
         INGREDIENTS.RICE,
         INGREDIENTS.EGG,
         INGREDIENTS.POT,
