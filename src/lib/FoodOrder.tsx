@@ -1,4 +1,3 @@
-import { BlockSizedGroupWithBorder } from "../components/BlockSizedGroupWithBorder";
 import { Group } from "../components/primitives/Group";
 import { BlockSizedSprite } from "../components/sprites/BlockSizedSprite";
 import { BLOCK_SIZE, MAX_INGREDIENTS_PER_RECIPE } from "../config";
@@ -12,6 +11,7 @@ import { LevelDescription } from "./LevelDescription";
 import { getRawIngredient } from "./getRawIngredient";
 
 const INGREDIENTS_SCALE = 1 / MAX_INGREDIENTS_PER_RECIPE;
+const BACKGROUND_INGREDIENT_OFFSET = 10;
 
 type FoodOrderID = Opaque<string, "FoodOrderID">;
 
@@ -37,11 +37,16 @@ export class FoodOrder implements IRenderable, IWithID<FoodOrderID> {
     const recipe = this.getRecipe();
 
     return (
-      <BlockSizedGroupWithBorder x={0} y={0} borderColor="#333">
+      <Group x={0} y={0}>
+        <BlockSizedSprite x={0} y={0} url={ImageAsset.OrderBackground} />
+
         {Array.from(recipe.ingredients).map((ingredient, index) => (
           <Group
             key={ingredient}
-            x={index * BLOCK_SIZE * INGREDIENTS_SCALE}
+            x={
+              index * BLOCK_SIZE * INGREDIENTS_SCALE +
+              BACKGROUND_INGREDIENT_OFFSET
+            }
             y={0}
             scale={INGREDIENTS_SCALE}
           >
@@ -52,13 +57,13 @@ export class FoodOrder implements IRenderable, IWithID<FoodOrderID> {
         ))}
 
         <Group
-          x={BLOCK_SIZE * INGREDIENTS_SCALE}
-          y={BLOCK_SIZE * INGREDIENTS_SCALE}
-          scale={1 - INGREDIENTS_SCALE}
+          x={BLOCK_SIZE * INGREDIENTS_SCALE + BACKGROUND_INGREDIENT_OFFSET / 2}
+          y={BLOCK_SIZE * INGREDIENTS_SCALE + BACKGROUND_INGREDIENT_OFFSET}
+          scale={(1 - INGREDIENTS_SCALE) * 0.6}
         >
           <BlockSizedSprite x={0} y={0} url={recipe.result as ImageAsset} />
         </Group>
-      </BlockSizedGroupWithBorder>
+      </Group>
     );
   }
 }
