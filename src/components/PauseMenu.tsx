@@ -54,7 +54,7 @@ export function PauseMenu({ onExitToMainMenu, onRestart }: IProps) {
         <MonospaceText
           text="Paused"
           color="black"
-          x={200}
+          x={150}
           y={50}
           align="center"
           fontSize={32}

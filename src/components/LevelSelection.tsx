@@ -1,6 +1,38 @@
 import { useMemo } from "react";
 import { LevelDescription, LevelDescriptionID } from "../lib/LevelDescription";
+import { ImageAsset } from "../config/ImageAsset";
+import { randomBetween } from "../lib/randomBetween";
+import { repeatArray } from "../lib/repeatArray";
+import { Percentage } from "../types/Numbers";
 import { FullScreenMenu } from "./FullScreenMenu";
+import { Sprite } from "./primitives/Sprite";
+import { FallingSprite } from "./sprites/FallingSprite";
+
+const FALLING_SPRITES = repeatArray(
+  [
+    ImageAsset.Blueberry,
+    ImageAsset.EggFriedRice,
+    ImageAsset.Rice,
+    ImageAsset.Jelly,
+    ImageAsset.CutBlueberry,
+    ImageAsset.Pot,
+  ],
+  20,
+).map((sprite, index) => {
+  const size = randomBetween(40, 50);
+
+  return (
+    <FallingSprite
+      key={index}
+      x={randomBetween(-1, 1) as Percentage}
+      width={size}
+      height={size}
+      startOffset={randomBetween(-1.5, 0)}
+      speed={0.00125}
+      url={sprite}
+    />
+  );
+});
 
 interface IProps {
   levelDesciptions: readonly LevelDescription[];
@@ -15,5 +47,24 @@ export function LevelSelection({ levelDesciptions, onSelectLevel }: IProps) {
     }));
   }, [levelDesciptions]);
 
-  return <FullScreenMenu options={options} onSelectOption={onSelectLevel} />;
+  return (
+    <FullScreenMenu
+      headerHeight={200}
+      header={
+        <>
+          {FALLING_SPRITES}
+
+          <Sprite
+            url={ImageAsset.MenuLogo}
+            x={-60}
+            y={-40}
+            width={400}
+            height={400}
+          />
+        </>
+      }
+      options={options}
+      onSelectOption={onSelectLevel}
+    />
+  );
 }

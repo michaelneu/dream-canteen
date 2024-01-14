@@ -11,8 +11,8 @@ import { MonospaceText } from "./primitives/MonospaceText";
 import { Rectangle } from "./primitives/Rectangle";
 import { Clickable } from "./primitives/Clickable";
 
-const BUTTON_WIDTH = 400;
-const BUTTON_HEIGHT = 100;
+const BUTTON_WIDTH = 300;
+const BUTTON_HEIGHT = 75;
 const BUTTON_VERTICAL_GAP = 25;
 
 interface IOption<TOption> {
@@ -144,7 +144,7 @@ function Button({ x, y, label, isActive, onClick, onHover }: IButtonProps) {
       <MonospaceText
         x={BUTTON_WIDTH / 2}
         y={BUTTON_HEIGHT / 2}
-        fontSize={32}
+        fontSize={24}
         text={label}
         align="center"
       />
