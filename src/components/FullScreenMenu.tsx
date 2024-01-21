@@ -5,6 +5,7 @@ import { firstx } from "../lib/firstx";
 import { useKeyDown } from "../hooks/useKeyDown";
 import { Keys } from "../lib/Keys";
 import { useScreenSizeContext } from "../contexts/ScreenSizeContext";
+import { useUniqueID } from "../hooks/useUniqueID";
 import { CenteredOnScreen } from "./CenteredOnScreen";
 import { Group } from "./primitives/Group";
 import { MonospaceText } from "./primitives/MonospaceText";
@@ -34,6 +35,8 @@ export function FullScreenMenu<TOption>({
   backdropOpacity = 0.5,
   ...props
 }: IProps<TOption>) {
+  const menuID = useUniqueID();
+
   invariant(options.length > 0, "Cannot select option without options");
 
   const [activeOption, setActiveOption] = useState(() => firstx(options).value);
@@ -69,7 +72,11 @@ export function FullScreenMenu<TOption>({
   const { width: screenWidth, height: screenHeight } = useScreenSizeContext();
   const renderedOptions = options.map((option, buttonIndex) => (
     <Button
-      key={String(option.value)}
+      key={
+        typeof option.value === "symbol"
+          ? `${menuID}-${buttonIndex}`
+          : String(option.value)
+      }
       x={0}
       y={
         buttonIndex * BUTTON_HEIGHT +
