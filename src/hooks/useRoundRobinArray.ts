@@ -1,18 +1,72 @@
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useReducer } from "react";
 import { invariant } from "../lib/invariant";
-import { usePrevious } from "./usePrevious";
 
-export function useRoundRobinArray<T>(array: readonly T[]): [T, () => void] {
-  const [index, setIndex] = useState(0);
-  const previousArray = usePrevious(array);
-  const autoResetIndex =
-    previousArray != null && previousArray !== array ? 0 : index;
+interface IRoundRobinState<T> {
+  array: readonly T[];
+  index: number;
+}
 
-  const next = useCallback(
-    () => setIndex((autoResetIndex + 1) % array.length),
-    [array.length, autoResetIndex],
+enum Action {
+  UpdateArray,
+  NextItem,
+}
+
+type Actions<T> =
+  | {
+      type: Action.NextItem;
+    }
+  | {
+      type: Action.UpdateArray;
+      array: readonly T[];
+    };
+
+function reducer<T>(
+  state: IRoundRobinState<T>,
+  action: Actions<T>,
+): IRoundRobinState<T> {
+  switch (action.type) {
+    case Action.NextItem:
+      return {
+        ...state,
+        index: (state.index + 1) % state.array.length,
+      };
+
+    case Action.UpdateArray:
+      if (action.array === state.array) {
+        return state;
+      }
+
+      return {
+        ...state,
+        array: action.array,
+        index: 0,
+      };
+  }
+}
+
+export function useRoundRobinArray<T>(
+  arrayFromProps: readonly T[],
+): [T, () => void] {
+  const [{ array, index }, dispatch] = useReducer(reducer, {
+    array: arrayFromProps,
+    index: 0,
+  });
+
+  useEffect(() => {
+    dispatch({
+      array: arrayFromProps,
+      type: Action.UpdateArray,
+    });
+  }, [arrayFromProps]);
+
+  const next = useCallback(() => {
+    dispatch({ type: Action.NextItem });
+  }, []);
+
+  invariant(
+    index < array.length,
+    `Out of bounds, index is ${index} for [${array.join(", ")}]`,
   );
 
-  invariant(autoResetIndex < array.length, "Out of bounds");
-  return [array[autoResetIndex], next];
+  return [array[index] as T, next];
 }
