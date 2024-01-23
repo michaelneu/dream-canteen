@@ -18,12 +18,12 @@
     "format": "yarn prettier --write",
     "lint": "eslint src/**/*.{ts,tsx}",
     "typecheck": "tsc --noEmit",
-    "unused": "ts-node --compilerOptions='{\"target\":\"es5\",\"module\":\"commonjs\"}' scripts/unused-exports.ts",
+    "unused": "ts-node --project=tsconfig.commonjs.json scripts/unused-exports.ts",
     "start": "PORT=8080 react-scripts start",
     "build": "react-scripts build",
     "eject": "react-scripts eject",
     "build::windows": "yarn build && electron-builder --windows --config.extraMetadata.main=build/electron.js",
-    "build::zip": "yarn rimraf dream-canteen.zip && ts-node --compilerOptions='{\"target\":\"es5\",\"module\":\"commonjs\"}' scripts/bundle-build-folder.ts"
+    "build::zip": "yarn rimraf dream-canteen.zip && ts-node --project=tsconfig.commonjs.json scripts/bundle-build-folder.ts"
   },
   "eslintConfig": {
     "rules": {
