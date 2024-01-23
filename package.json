@@ -1,6 +1,6 @@
 {
   "name": "game",
-  "version": "0.1.11",
+  "version": "0.1.12",
   "private": true,
   "author": "dream-canteen",
   "description": "dream-canteen",
@@ -71,6 +71,10 @@
     ],
     "directories": {
       "buildResources": "public"
+    },
+    "publish": {
+      "provider": "github",
+      "releaseType": "release"
     },
     "win": {
       "target": "portable"

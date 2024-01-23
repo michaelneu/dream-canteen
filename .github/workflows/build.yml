@@ -34,7 +34,6 @@ jobs:
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: dream-canteen.zip
-          prerelease: true
           asset_name: dream-canteen.zip
           tag: ${{ github.ref }}
           overwrite: true
