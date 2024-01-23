@@ -48,6 +48,11 @@ Are your hands always full, or are you blocked by counters? Choose from differen
   <img src="readme/cooking.png" width="49%" />
 </p>
 
+<p>
+  <img src="readme/ability-speed.png" width="49%" />
+  <img src="readme/ability-phase.png" width="49%" />
+</p>
+
 ## License
 
 This project is purely educational and is thus licensed under the [MIT license](LICENSE).
