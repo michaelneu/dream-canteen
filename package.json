@@ -1,6 +1,6 @@
 {
   "name": "game",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "private": true,
   "author": "dream-canteen",
   "description": "dream-canteen",
@@ -22,7 +22,8 @@
     "start": "PORT=8080 react-scripts start",
     "build": "react-scripts build",
     "eject": "react-scripts eject",
-    "build::windows": "yarn build && electron-builder --windows --config.extraMetadata.main=build/electron.js"
+    "build::windows": "yarn build && electron-builder --windows --config.extraMetadata.main=build/electron.js",
+    "build::zip": "yarn rimraf dream-canteen.zip && ts-node --compilerOptions='{\"target\":\"es5\",\"module\":\"commonjs\"}' scripts/bundle-build-folder.ts"
   },
   "eslintConfig": {
     "rules": {
@@ -48,9 +49,11 @@
     ]
   },
   "devDependencies": {
+    "@types/adm-zip": "^0.5.5",
     "@types/fbjs": "^3.0.10",
     "@types/react": "^18.0.0",
     "@types/react-dom": "^18.0.0",
+    "adm-zip": "^0.5.10",
     "electron": "^28.1.0",
     "electron-builder": "^24.9.1",
     "eslint-plugin-import": "^2.29.1",

@@ -1,18 +1,10 @@
 import fs from "fs";
-
-function listAllFiles(path: string): readonly string[] {
-  if (!fs.lstatSync(path).isDirectory()) {
-    return [path];
-  }
-
-  const items = fs.readdirSync(path);
-  return items.flatMap((item) => listAllFiles(`${path}/${item}`));
-}
+import { listAllFiles } from "./shared/listAllFiles";
 
 function findExports(text: string): readonly string[] {
   return Array.from(
     text.matchAll(
-      /export (enum|const|abstract class|class|type|interface|function) ([A-Za-z0-9\_]+)/g,
+      /export (enum|const|abstract class|class|type|interface|function) ([A-Za-z0-9_]+)/g,
     ),
   ).map((match) => match[0].split(" ")[2]);
 }
@@ -24,8 +16,8 @@ const files = new Map(
     return [
       path,
       {
-        text,
         exportedSymbols: findExports(text),
+        text,
       },
     ];
   }),
