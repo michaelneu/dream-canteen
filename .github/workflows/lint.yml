@@ -3,7 +3,7 @@ name: Lint
 on: push
 
 jobs:
-  release:
+  lint:
     runs-on: ubuntu-latest
 
     steps:
@@ -14,6 +14,9 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: 21
+
+      - name: yarn install
+        run: yarn install
 
       - name: Format
         run: yarn prettier --check
