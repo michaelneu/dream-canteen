@@ -43,5 +43,5 @@ jobs:
         uses: samuelmeuli/action-electron-builder@v1
         with:
           github_token: ${{ secrets.github_token }}
-          args: --release always
+          release: true
           skip_build: true
